@@ -910,10 +910,7 @@ class Arr
 		$permutations = $array;
 		$size = count($array);
 
-		$indices = [];
-		for ($index = 0; $index < $size; $index++) {
-			$indices[$index] = 0;
-		}
+		$indices = array_fill(0, $size, 0);
 
 		while (1) {
 
@@ -921,19 +918,21 @@ class Arr
 			for ($index = 0; $index < $size; $index++) {
 				$res[] = $array[$index][$indices[$index]];
 			}
+
 			$permutations[] = $res;
 			$next = $size - 1;
+
 			while ($next >= 0 &&
 				   ($indices[$next] + 1 >= count($array[$next]))) {
 				$next--;
 			}
+
 			if ($next < 0) {
 				return $permutations;
 			}
+
 			$indices[$next]++;
-			for ($index = $next + 1; $index < $size; $index++) {
-				$indices[$index] = 0;
-			}
+			$indices = array_merge(array_slice($indices, 0, $next + 1), array_fill($next + 1, $size - $next - 1, 0));
 
 		}
 
