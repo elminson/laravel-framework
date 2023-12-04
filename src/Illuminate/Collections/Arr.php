@@ -923,7 +923,7 @@ class Arr
 			$next = $size - 1;
 
 			while ($next >= 0 &&
-				   ($indices[$next] + 1 >= count($array[$next]))) {
+				   (($indices[$next] + 1) >= count($array[$next]))) {
 				$next--;
 			}
 
